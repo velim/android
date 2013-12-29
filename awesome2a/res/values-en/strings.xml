@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="app_name">awesome2</string>
+    <string name="action_settings">Settings</string>
+    <string name="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id metus lacinia, tristique nisl at, auctor neque. Morbi mattis eu neque rutrum dictum. Ut vel neque malesuada est auctor bibendum. Quisque volutpat euismod elit, pulvinar rutrum purus aliquet sed. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc in molestie lorem. Phasellus sed sagittis nibh. Vivamus gravida massa vitae augue adipiscing pulvinar. Donec eu mauris in justo mattis rhoncus. Pellentesque quis consectetur erat. Nunc cursus lacinia lectus quis scelerisque. Sed vel dignissim libero, quis euismod enim. Vivamus lacus lacus, tristique vel sollicitudin eu, blandit vitae nisi. Sed sollicitudin ornare lorem eu venenatis. Aenean tempus placerat lorem, ut congue velit dictum ac. Donec non justo et risus gravida adipiscing vel vitae orci.</string>
+    <string name="hello">hello</string>
+
+</resources>

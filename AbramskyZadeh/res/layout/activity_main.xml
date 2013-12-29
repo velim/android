@@ -14,8 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
-        android:text="@string/abramskyname" />
+        android:layout_marginBottom="8dp"
+        android:text="@string/abramskyname"
+        android:textSize="22sp" />
 
     <ImageView
         android:id="@+id/imageView1"
@@ -23,6 +24,7 @@
         android:layout_height="200sp"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
         android:contentDescription="@string/abramsky_image_desc"
         android:src="@drawable/abramsky" />
 
@@ -34,15 +36,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp" >
 
-     
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/abramskybio" />
-
-  
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/abramskybio" />
     </ScrollView>
 
 </RelativeLayout>

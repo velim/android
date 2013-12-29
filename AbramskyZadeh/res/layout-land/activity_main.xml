@@ -14,35 +14,30 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
-        android:text="@string/abramskyname" />
+        android:text="@string/zadehname" />
 
     <ImageView
         android:id="@+id/imageView1"
+        android:contentDescription="@string/zadeh_image_desc"
         android:layout_width="200sp"
         android:layout_height="200sp"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="@string/abramsky_image_desc"
-        android:src="@drawable/abramsky" />
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/zadeh" />
 
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="19dp" >
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_below="@+id/textView1"
+        android:layout_toRightOf="@+id/imageView1" >
 
-     
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/abramskybio" />
-
-  
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/zadehbio" />
     </ScrollView>
 
 </RelativeLayout>

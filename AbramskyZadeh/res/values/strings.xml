@@ -1,8 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">AbramskyZadeh</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="zadehbio">Zadeh was born in Baku, Azerbaijan SSR, as Lotfi Aliaskerzadeh, to an Iranian Azerbaijanis father from Ardabil, Rahim Aleskerzade, who was a journalist on assignment from Iran, and a Russian Jewish mother, Fanya Koriman, who was a pediatrician. The Soviet government at this time courted foreign correspondents, and the family lived well while in Baku. Zadeh attended elementary school for three years there, which he has said \"had a significant and long-lasting influence on my thinking and my way of looking at things.\"
+In 1931, when Zadeh was ten years old, his family moved to Tehran in Iran, his father\'s homeland. Zadeh was enrolled in Alborz College, which was a Presbyterian missionary school, where he was educated for the next eight years, and where he met his future wife, Fay. Zadeh says that he was \"deeply influenced\" by the \"extremely decent, fine, honest and helpful\" missionaries from the United States who ran the college. \"To me they represented the best that you could find in the United States – people from the Midwest with strong roots. They were really \"Good Samaritans\" – willing to give of themselves for the benefit of others. So this kind of attitude influenced me deeply. It also instilled in me a deep desire to live in the United States.\" During this time, Zadeh was awarded several patents.
+Despite being more fluent in Russian than in Persian, Zadeh sat for the national university exams and placed third in the entire country. As a student, he ranked first in his class in his first two years. In 1942, he graduated from the University of Tehran with a degree in electrical engineering (Fanni), one of only three students in that field to graduate that year, due to the turmoil created by World War II, when the Soviet Union invaded Iran – whose ruler, the Shah, was pro-German – and split the administration of the country with the British. Over 30,000 American soldiers were also based there, and Zadeh worked with his father, who did business with them as a contractor for hardware and building materials.
+In 1943, Zadeh decided to emigrate to the United States, and traveled to Philadelphia by way of Cairo after months of delay waiting for the proper papers or for the right ship to appear. He arrived in mid-1944, and entered M.I.T. as a graduate student later that year. While in the United States, he changed his name to Lotfi Asker Zadeh.
+He received an MS degree in electrical engineering from M.I.T. in 1946, and then applied to Columbia University, as his parents had settled in New York City. Columbia admitted him as a doctoral student, and offered him an instructorship as well. He received his PhD in electrical engineering from Columbia in 1949, and became an assistant professor the next year.
+Zadeh taught for ten years at Columbia, was promoted to Full Professor in 1957, and has taught at the University of California, Berkeley since 1959. He published his seminal work on fuzzy sets in 1965, in which he detailed the mathematics of fuzzy set theory. In 1973 he proposed his theory of fuzzy logic.</string>
+    <string name="zadehname">Lotfi A. Zadeh</string>
+    <string name="zadeh_image_desc">zadeh image description</string>
+    
+    <string name="abramskybio">Samson Abramsky FRS, FRSE is a computer scientist who holds the Christopher Strachey Professorship at Oxford University Computing Laboratory. He is well known for playing a leading role in the development of game semantics. He has made significant contributions to the areas of domain theory, the lazy lambda calculus, strictness analysis, concurrency theory, interaction categories, and the geometry of interaction.
+        Since 2000, he has been a Fellow of the Royal Society of Edinburgh, a Fellow of Wolfson College, Oxford and Christopher Strachey Professor of Computing at Oxford University Department of Computer Science. He has also been a Fellow of the Royal Society since 2004. His research achievements include the development of game semantics, domain theory in logical form, and categorical quantum mechanics.
+        </string>
+    <string name="abramskyname">Samson Abramsky</string>
+    <string name="abramsky_image_desc">abramsky image description</string>
 
 </resources>

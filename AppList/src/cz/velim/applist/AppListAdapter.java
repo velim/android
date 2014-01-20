@@ -44,7 +44,7 @@ public class AppListAdapter extends BaseAdapter {
 		// textview.setLayoutParams(new GridView.LayoutParams(85, 85));
 		textview.setPadding(20, 20, 20, 20);
 		ActivityInfo activityInfo = pkgAppsList.get(position).activityInfo;
-		textview.setText(activityInfo.name);
+		textview.setText(mContext.getPackageManager().getApplicationLabel(activityInfo.applicationInfo));
 
 		return textview;
 	}

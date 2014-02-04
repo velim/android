@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RssReader</string>
+    <string name="view_in_browser">view item in browser</string>
+    <string name="bbc_technology">bcc technology</string>
+    <string name="idnes_technet">idnes technet</string>
+    <string name="idnes_mobil">idnes mobil</string>
+    <string name="bbc_top_stories">bbc top stories</string>
+
+</resources>

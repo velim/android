@@ -1,17 +1,21 @@
 package cz.velim.rssreader.activities;
 
+import java.io.InputStream;
 import java.util.List;
 
-import cz.velim.rssreader.R;
-import cz.velim.rssreader.R.id;
-import cz.velim.rssreader.R.layout;
-import cz.velim.rssreader.rss.RssItem;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+import cz.velim.rssreader.R;
+import cz.velim.rssreader.rss.RssFeed;
+import cz.velim.rssreader.rss.RssItem;
 
 public class RssListAdapter extends BaseAdapter {
 
@@ -42,22 +46,42 @@ public class RssListAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		ListItemHolder holder = new ListItemHolder();
-		
-        //creating LayoutInflator for inflating the row layout.
-        LayoutInflater inflator = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
- 
-        //inflating the row layout we defined earlier.
-        convertView = inflator.inflate(R.layout.list_item, null);
-         
-        //setting the views into the ViewHolder.
-        holder.title = (TextView) convertView.findViewById(R.id.title);
-        holder.title.setText(rssList.get(position).getTitle());
-        holder.date = (TextView) convertView.findViewById(R.id.date);
-        holder.date.setText(rssList.get(position).getPubDate());
- 
-        //return the row view.
-        return convertView;
+		final ListItemHolder holder = new ListItemHolder();
+
+		// creating LayoutInflator for inflating the row layout.
+		LayoutInflater inflator = (LayoutInflater) mContext
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+		// inflating the row layout we defined earlier.
+		convertView = inflator.inflate(R.layout.list_item, null);
+
+		// setting the views into the ViewHolder.
+		holder.title = (TextView) convertView.findViewById(R.id.title);
+		holder.title.setText(rssList.get(position).getTitle());
+		holder.date = (TextView) convertView.findViewById(R.id.date);
+		holder.date.setText(rssList.get(position).getPubDate());
+		holder.image = (ImageView) convertView.findViewById(R.id.image);
+
+		new AsyncTask<String, Void, Bitmap>() {
+
+			@Override
+			protected Bitmap doInBackground(String... urls) {
+				String url = urls[0];
+				RssFeed rssFeed = new RssFeed(url);
+				InputStream inputStream = rssFeed.getInputStream();
+				return BitmapFactory.decodeStream(inputStream);
+			}
+			
+			@Override
+			protected void onPostExecute(Bitmap bitmap) {
+				if (bitmap != null)
+					holder.image.setImageBitmap(bitmap);
+			}
+
+		}.execute(rssList.get(position).getThumb66());
+
+		// return the row view.
+		return convertView;
 	}
 
 }

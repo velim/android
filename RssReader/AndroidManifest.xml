@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="cz.velim.rssreader.activities.DetailActivity"
+            android:name="cz.velim.rssreader.activities.RssDetailActivity"
             android:label="@string/app_name" >
         </activity>
     </application>

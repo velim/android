@@ -127,7 +127,17 @@ public class RssParser {
 					item.setDesc(parser.getText());
 					parser.nextTag();
 				}
-
+				
+			} else if (name.equals("media:thumbnail") &&  parser.getAttributeValue(null, "width").equals("66")) {
+				
+					item.setThumb66(parser.getAttributeValue(null, "url"));
+					parser.nextTag();
+					
+			} else if (name.equals("media:thumbnail") &&  parser.getAttributeValue(null, "width").equals("144")) {
+				
+				item.setThumb144(parser.getAttributeValue(null, "url"));
+				parser.nextTag();					
+				
 			} else {
 				skip(parser);
 			}

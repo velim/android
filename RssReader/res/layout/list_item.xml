@@ -9,8 +9,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="8dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_toLeftOf="@+id/image"
+        android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
 
     <TextView
         android:id="@+id/date"
@@ -20,6 +22,15 @@
         android:layout_below="@id/title"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="30dp"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="bb"/>
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_launcher" />
 
 </RelativeLayout>

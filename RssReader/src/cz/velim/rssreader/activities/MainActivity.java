@@ -1,5 +1,7 @@
 package cz.velim.rssreader.activities;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -33,21 +35,61 @@ public class MainActivity extends Activity {
 	public static final int RSS_IDNES_MOBIL_ID = 3;
 	public static final String RSS_IDNES_MOBIL = "http://mobil.idnes.cz.feedsportal.com/c/33698/f/597321/index.rss";
 
-	ListView listView;
-	List<RssItem> topics;
+	private static final String SAVED_KEY = "SAVED";
 
+	ListView listView;
+	ArrayList<RssItem> topics;
+
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Log.i("rss", "onCreate");
 		listView = (ListView) findViewById(R.id.listView1);
-		loadRssItemsToList(MainActivity.RSS_BBC_TECHNOLOGY);
 
+		if (savedInstanceState != null) {
+			
+			topics = (ArrayList<RssItem>) savedInstanceState
+					.getSerializable(SAVED_KEY);
+			loadListView(topics);
+			
+		} else {
+			
+			loadRssItemsToList(MainActivity.RSS_BBC_TECHNOLOGY);
+			
+		}
+
+	}
+	
+	private void loadListView(ArrayList<RssItem> items) {
+		
+		listView.setAdapter(new RssListAdapter(getBaseContext(), items));
+
+		listView.setOnItemClickListener(new OnItemClickListener() {
+			@SuppressLint("InlinedApi")
+			@Override
+			public void onItemClick(AdapterView<?> parent, View v,
+					int position, long id) {
+				RssItem rssItem = topics.get(position);
+				Intent intent = new Intent(getBaseContext(),
+						RssDetailActivity.class);
+				intent.putExtra("rssItem", rssItem);
+				startActivity(intent);
+			}
+			
+		});
+
+	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle savedInstanceState) {
+		savedInstanceState.putSerializable(SAVED_KEY, topics);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		menu.add(0, MainActivity.RSS_BBC_TOP_STORIES_ID, 0,
@@ -57,8 +99,8 @@ public class MainActivity extends Activity {
 		menu.add(1, MainActivity.RSS_IDNES_MOBIL_ID, 0, R.string.idnes_mobil);
 		menu.add(1, MainActivity.RSS_IDNES_TECHNET_ID, 0,
 				R.string.idnes_technet);
-
 		return true;
+		
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -78,13 +120,10 @@ public class MainActivity extends Activity {
 		default:
 			return false;
 		}
-
 	}
 
 	private void loadRssItemsToList(String rssSource) {
-
 		new HttpAsyncTask().execute(rssSource);
-
 	}
 
 	private class HttpAsyncTask extends AsyncTask<String, Void, List<RssItem>> {
@@ -95,8 +134,6 @@ public class MainActivity extends Activity {
 			topics = rssParser.gesRssTopics();
 
 			if (topics == null) {
-				// Toast.makeText(getApplicationContext(), "rss download error",
-				// Toast.LENGTH_LONG).show();
 				return null;
 			}
 			return topics;
@@ -105,6 +142,7 @@ public class MainActivity extends Activity {
 		// onPostExecute displays the results of the AsyncTask.
 		@Override
 		protected void onPostExecute(List<RssItem> result) {
+			
 			if (result == null) {
 				Toast.makeText(getApplicationContext(), "rss download error",
 						Toast.LENGTH_LONG).show();
@@ -112,20 +150,8 @@ public class MainActivity extends Activity {
 			}
 			Toast.makeText(getBaseContext(), "download complete",
 					Toast.LENGTH_SHORT).show();
-			listView.setAdapter(new RssListAdapter(getBaseContext(), result));
-
-			listView.setOnItemClickListener(new OnItemClickListener() {
-				@SuppressLint("InlinedApi")
-				@Override
-				public void onItemClick(AdapterView<?> parent, View v,
-						int position, long id) {
-					RssItem rssItem = topics.get(position);
-					Intent intent = new Intent(getBaseContext(),
-							RssDetailActivity.class);
-					intent.putExtra("rssItem", rssItem);
-					startActivity(intent);
-				}
-			});
+			loadListView(topics);
+			
 		}
 	}
 

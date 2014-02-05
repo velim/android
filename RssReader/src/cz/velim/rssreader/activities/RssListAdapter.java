@@ -1,6 +1,5 @@
 package cz.velim.rssreader.activities;
 
-import java.io.InputStream;
 import java.util.List;
 
 import android.content.Context;
@@ -45,7 +44,7 @@ public class RssListAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		final ListItemHolder holder = new ListItemHolder();
 
 		// creating LayoutInflator for inflating the row layout.
@@ -62,23 +61,39 @@ public class RssListAdapter extends BaseAdapter {
 		holder.date.setText(rssList.get(position).getPubDate());
 		holder.image = (ImageView) convertView.findViewById(R.id.image);
 
-		new AsyncTask<String, Void, Bitmap>() {
+		if (rssList.get(position).getThumb144() == null)
+			return convertView;
 
-			@Override
-			protected Bitmap doInBackground(String... urls) {
-				String url = urls[0];
-				RssFeed rssFeed = new RssFeed(url);
-				InputStream inputStream = rssFeed.getInputStream();
-				return BitmapFactory.decodeStream(inputStream);
-			}
-			
-			@Override
-			protected void onPostExecute(Bitmap bitmap) {
-				if (bitmap != null)
-					holder.image.setImageBitmap(bitmap);
-			}
+		if (rssList.get(position).getThumb144().getBitmap() == null) {
+			new AsyncTask<String, Void, Bitmap>() {
 
-		}.execute(rssList.get(position).getThumb66());
+				@Override
+				protected Bitmap doInBackground(String... urls) {
+					String url = urls[0];
+					RssFeed rssFeed = new RssFeed(url);
+					return BitmapFactory.decodeStream(rssFeed.getInputStream());
+				}
+
+				@Override
+				protected void onPostExecute(Bitmap bitmap) {
+					if (bitmap != null) {
+						rssList.get(position)
+								.getThumb144()
+								.setBitmap(
+										Bitmap.createScaledBitmap(bitmap,
+												bitmap.getWidth() * 2,
+												bitmap.getHeight() * 2, false));
+						holder.image.setImageBitmap(rssList.get(position)
+								.getThumb144().getBitmap());
+					}
+				}
+
+			}.execute(rssList.get(position).getThumb144().getLink());
+
+		} else {
+			holder.image.setImageBitmap(rssList.get(position).getThumb144()
+					.getBitmap());
+		}
 
 		// return the row view.
 		return convertView;

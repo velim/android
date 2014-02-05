@@ -7,12 +7,13 @@ public class RssItem implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -2547316623069795525L;
+	protected static final String TAG = RssItem.class.getSimpleName();
 	private String mTitle;
 	private String pubDate;
 	private String link;
 	private String desc;
-	private String mUrlThumb66;
-	private String thumb144;
+	private ThumbData mThumb66;
+	private ThumbData mThumb144;
 
 	public void setTitle(String text) {
 		mTitle = text;
@@ -47,20 +48,26 @@ public class RssItem implements Serializable {
 		return desc;
 	}
 
-	public void setThumb66(String url) {
-		mUrlThumb66 = url;
+	public void setThumb66(String url, String width, String height) {
+		mThumb66 = new ThumbData();
+		mThumb66.setLink(url);
+		mThumb66.setWidth(width);
+		mThumb66.setHeight(height);
 	}
 
-	public String getThumb66() {
-		return mUrlThumb66;
+	public ThumbData getThumb66() {
+		return mThumb66;
 	}
 
-	public String getThumb144() {
-		return thumb144;
+	public void setThumb144(String url, String width, String height) {
+		mThumb144 = new ThumbData();
+		mThumb144.setLink(url);
+		mThumb144.setWidth(width);
+		mThumb144.setHeight(height);
 	}
 
-	public void setThumb144(String url) {
-		thumb144 = url;
+	public ThumbData getThumb144() {
+		return mThumb144;
 	}
 
 }

@@ -2,7 +2,11 @@ package cz.velim.rssreader.rss;
 
 import java.io.Serializable;
 
-public class RssItem implements Serializable {
+import android.graphics.Bitmap;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class RssItem implements Parcelable, Serializable {
 	/**
 	 * 
 	 */
@@ -14,6 +18,30 @@ public class RssItem implements Serializable {
 	private String desc;
 	private ThumbData mThumb66;
 	private ThumbData mThumb144;
+
+	public RssItem(Parcel p) {
+		setTitle(p.readString());
+		setPubDate(p.readString());
+		setLink(p.readString());
+		setDesc(p.readString());
+
+		Bitmap bitmap1 = (Bitmap) p.readParcelable(getClass().getClassLoader());
+		if (bitmap1 != null) {
+			mThumb66 = new ThumbData();
+			mThumb66.setBitmap(bitmap1);
+		}
+
+		Bitmap bitmap2 = (Bitmap) p.readParcelable(getClass().getClassLoader());
+		if (bitmap2 != null) {
+			mThumb144 = new ThumbData();
+			mThumb144.setBitmap(bitmap2);
+		}
+
+	}
+
+	public RssItem() {
+
+	}
 
 	public void setTitle(String text) {
 		mTitle = text;
@@ -69,5 +97,37 @@ public class RssItem implements Serializable {
 	public ThumbData getThumb144() {
 		return mThumb144;
 	}
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel des, int flags) {
+		des.writeString(getTitle());
+		des.writeString(getPubDate());
+		des.writeString(getLink());
+		des.writeString(getDesc());
+		if (getThumb66() != null)
+			des.writeParcelable(getThumb66().getBitmap(), flags);
+		if (getThumb144() != null)
+			des.writeParcelable(getThumb144().getBitmap(), flags);
+	}
+
+	public static final Parcelable.Creator<RssItem> CREATOR = new Creator<RssItem>() {
+
+		public RssItem createFromParcel(Parcel source) {
+
+			return new RssItem(source);
+		}
+
+		public RssItem[] newArray(int size) {
+
+			return new RssItem[size];
+		}
+
+	};
 
 }

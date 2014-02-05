@@ -1,15 +1,17 @@
 package cz.velim.rssreader.activities;
 
-import cz.velim.rssreader.R;
-import cz.velim.rssreader.R.id;
-import cz.velim.rssreader.R.layout;
-import cz.velim.rssreader.rss.RssItem;
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.ImageView;
+import cz.velim.rssreader.R;
+import cz.velim.rssreader.rss.RssItem;
 
 public class RssDetailActivity extends Activity {
 	RssItem rssItem;
@@ -18,12 +20,21 @@ public class RssDetailActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_rss_detail);
-		rssItem = (RssItem) getIntent().getSerializableExtra("rssItem");
+		ArrayList<RssItem> rssArray = getIntent().getParcelableArrayListExtra(
+				MainActivity.KEY_RSS_ITEM);
+		rssItem = rssArray.get(0);
 		WebView wv = (WebView) findViewById(R.id.webViewRssDesc);
 		final String mimeType = "text/html";
 		final String encoding = "UTF-8";
-
 		wv.loadDataWithBaseURL("", rssItem.getDesc(), mimeType, encoding, "");
+
+		if (rssItem.getThumb144() != null) {
+			ImageView iv = (ImageView) findViewById(R.id.imageView1);
+			Bitmap bitmap = rssItem.getThumb144().getBitmap();
+			iv.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
+					bitmap.getWidth() * 2, bitmap.getHeight() * 2, false));
+		}
+
 	}
 
 	public void showInBrowser(View v) {

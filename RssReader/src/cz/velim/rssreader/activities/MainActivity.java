@@ -1,6 +1,5 @@
 package cz.velim.rssreader.activities;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +21,8 @@ import cz.velim.rssreader.rss.RssParser;
 
 public class MainActivity extends Activity {
 
+	public static final String KEY_RSS_ITEM = "rssItem";
+	
 	public static final int RSS_BBC_TECHNOLOGY_ID = 0;
 	public static final String RSS_BBC_TECHNOLOGY = "http://feeds.bbci.co.uk/news/technology/rss.xml";
 
@@ -34,7 +34,10 @@ public class MainActivity extends Activity {
 
 	public static final int RSS_IDNES_MOBIL_ID = 3;
 	public static final String RSS_IDNES_MOBIL = "http://mobil.idnes.cz.feedsportal.com/c/33698/f/597321/index.rss";
-
+	
+	public static final int RSS_CNN_EUROPE_ID = 4;
+	public static final String RSS_CNN_EUROPE = "http://rss.cnn.com/rss/edition_europe.rss";
+	
 	private static final String SAVED_KEY = "SAVED";
 
 	ListView listView;
@@ -45,7 +48,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		Log.i("rss", "onCreate");
+		
 		listView = (ListView) findViewById(R.id.listView1);
 
 		if (savedInstanceState != null) {
@@ -71,10 +74,14 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
+				
 				RssItem rssItem = topics.get(position);
 				Intent intent = new Intent(getBaseContext(),
 						RssDetailActivity.class);
-				intent.putExtra("rssItem", rssItem);
+				
+				ArrayList<RssItem> al = new ArrayList<RssItem>();
+				al.add(rssItem);
+				intent.putParcelableArrayListExtra(KEY_RSS_ITEM, al);
 				startActivity(intent);
 			}
 			
@@ -99,6 +106,8 @@ public class MainActivity extends Activity {
 		menu.add(1, MainActivity.RSS_IDNES_MOBIL_ID, 0, R.string.idnes_mobil);
 		menu.add(1, MainActivity.RSS_IDNES_TECHNET_ID, 0,
 				R.string.idnes_technet);
+		menu.add(1, MainActivity.RSS_CNN_EUROPE_ID, 0,
+				R.string.cnn_europe);
 		return true;
 		
 	}
@@ -117,6 +126,9 @@ public class MainActivity extends Activity {
 		case MainActivity.RSS_IDNES_MOBIL_ID:
 			loadRssItemsToList(MainActivity.RSS_IDNES_MOBIL);
 			return true;
+		case MainActivity.RSS_CNN_EUROPE_ID:
+			loadRssItemsToList(MainActivity.RSS_CNN_EUROPE);
+			return true;			
 		default:
 			return false;
 		}

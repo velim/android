@@ -31,8 +31,7 @@ public class RssDetailActivity extends Activity {
 		if (rssItem.getThumb144() != null) {
 			ImageView iv = (ImageView) findViewById(R.id.imageView1);
 			Bitmap bitmap = rssItem.getThumb144().getBitmap();
-			iv.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
-					bitmap.getWidth() * 2, bitmap.getHeight() * 2, false));
+			iv.setImageBitmap(bitmap);
 		}
 
 	}

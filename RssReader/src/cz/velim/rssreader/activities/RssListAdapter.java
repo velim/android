@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import cz.velim.rssreader.rss.RssItem;
 
 public class RssListAdapter extends BaseAdapter {
 
+	private static final String TAG = RssListAdapter.class.getSimpleName();
 	private Context mContext;
 	final List<RssItem> rssList;
 
@@ -60,7 +62,7 @@ public class RssListAdapter extends BaseAdapter {
 		holder.date = (TextView) convertView.findViewById(R.id.date);
 		holder.date.setText(rssList.get(position).getPubDate());
 		holder.image = (ImageView) convertView.findViewById(R.id.image);
-
+		
 		if (rssList.get(position).getThumb144() == null)
 			return convertView;
 
@@ -79,10 +81,7 @@ public class RssListAdapter extends BaseAdapter {
 					if (bitmap != null) {
 						rssList.get(position)
 								.getThumb144()
-								.setBitmap(
-										Bitmap.createScaledBitmap(bitmap,
-												bitmap.getWidth() * 2,
-												bitmap.getHeight() * 2, false));
+								.setBitmap(bitmap);
 						holder.image.setImageBitmap(rssList.get(position)
 								.getThumb144().getBitmap());
 					}
